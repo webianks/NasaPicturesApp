@@ -1,9 +1,9 @@
 package com.webianks.nasapicturesapp.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityMainBinding
 import com.webianks.nasapicturesapp.utils.getPicturesList
 
@@ -22,6 +22,12 @@ class MainActivity : AppCompatActivity() {
     private fun setupPicturesList() {
         val picturesList = getPicturesList(this)
         binding.rvPicturesList.layoutManager = GridLayoutManager(this,2)
-        binding.rvPicturesList.adapter = PicturesListAdapter(picturesList)
+        binding.rvPicturesList.adapter = PicturesListAdapter(picturesList){
+            val item = picturesList[it]
+            Intent(this,DetailsActivity::class.java).run {
+                putExtra("picture",item)
+                startActivity(this)
+            }
+        }
     }
 }
