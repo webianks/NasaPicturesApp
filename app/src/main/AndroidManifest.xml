@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.DetailsActivity"/>
+        <activity android:name=".ui.DetailsActivity"
+            android:theme="@style/Theme.NasaPicturesApp.Details"
+            />
 
     </application>
 
