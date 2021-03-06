@@ -1,7 +1,8 @@
-package com.webianks.nasapicturesapp
+package com.webianks.nasapicturesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.webianks.nasapicturesapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
