@@ -21,4 +21,8 @@ class MainViewModel(private val application: Application, private val gson: Gson
             picturesListState.postValue(Success(it))
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+    }
 }

@@ -8,16 +8,26 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityMainBinding
+import com.webianks.nasapicturesapp.di.component.DaggerActivityComponent
+import com.webianks.nasapicturesapp.di.module.ActivityModule
 import com.webianks.nasapicturesapp.utils.Error
 import com.webianks.nasapicturesapp.utils.Loading
 import com.webianks.nasapicturesapp.utils.Success
 import com.webianks.nasapicturesapp.utils.ViewModelProviderFactory
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: PicturesListAdapter
+
+    @Inject
+    lateinit var viewModel: MainViewModel
+
+    @Inject
+    lateinit var adapter: PicturesListAdapter
+
+    @Inject
+    lateinit var glm : GridLayoutManager
 
     companion object {
         const val SINGLE_PICTURE = "picture"
@@ -26,13 +36,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getDependencies()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
-
-        viewModel = ViewModelProviders.of(this, ViewModelProviderFactory(MainViewModel::class) {
-            MainViewModel(application, Gson())
-        }).get(MainViewModel::class.java)
 
         setContentView(view)
         setupPicturesList()
@@ -62,8 +69,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupPicturesList() {
 
-        binding.rvPicturesList.layoutManager = GridLayoutManager(this, GRID_SPAN_COUNT)
-        adapter = PicturesListAdapter(emptyList()) {
+        binding.rvPicturesList.layoutManager = glm
+        adapter.openDetailsClickLister = {
             val item = adapter.getItemAt(it)
             item?.let {
                 Intent(this, DetailsActivity::class.java).run {
@@ -74,4 +81,13 @@ class MainActivity : AppCompatActivity() {
         }
         binding.rvPicturesList.adapter = adapter
     }
+
+    private fun getDependencies() {
+        DaggerActivityComponent
+            .builder()
+            .activityModule(ActivityModule(this))
+            .build()
+            .inject(this)
+    }
+
 }

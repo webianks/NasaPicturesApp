@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ItemListPictureBinding
 
-class PicturesListAdapter(
-    private var list: List<NasaPicture>,
-    private val openDetailsClickLister: ((Int) -> Unit)? = null
-) :
+class PicturesListAdapter(private var list: List<NasaPicture>) :
     RecyclerView.Adapter<PicturesListViewHolder>() {
+
+    var openDetailsClickLister: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicturesListViewHolder {
         val itemBinding =
