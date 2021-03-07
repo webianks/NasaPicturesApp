@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class NasaPicture(
-    @SerializedName("copyright") val copyright: String,
+    @SerializedName("copyright") val copyright: String? = null,
     @SerializedName("date") val date: String,
     @SerializedName("explanation") val explanation: String,
     @SerializedName("hdurl") val hdUrl: String,

@@ -1,18 +1,24 @@
 package com.webianks.nasapicturesapp.utils
 
-import android.content.Context
-import androidx.annotation.RawRes
+import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.webianks.nasapicturesapp.R
-import com.webianks.nasapicturesapp.data.NasaPicture
+import java.io.IOException
+import java.io.InputStream
 
-
-private inline fun <reified T> Context.readRawJson(@RawRes rawResId: Int, gson: Gson): T {
-    resources.openRawResource(rawResId).bufferedReader().use {
-        return gson.fromJson<T>(it, object : TypeToken<T>() {}.type)
+fun Application.getAssetJsonData(file: String): String? {
+    return try {
+        val `is`: InputStream = assets.open(file)
+        val size: Int = `is`.available()
+        val buffer = ByteArray(size)
+        `is`.read(buffer)
+        `is`.close()
+        String(buffer)
+    } catch (ex: IOException) {
+        ex.printStackTrace()
+        return null
     }
 }
 
-//TODO remove
-fun getPicturesList(context: Context) : List<NasaPicture> = context.readRawJson(R.raw.data, Gson())
+inline fun <reified T> String.toNasaPicturesList(gson: Gson): T =
+    gson.fromJson<T>(this, object : TypeToken<T>() {}.type)

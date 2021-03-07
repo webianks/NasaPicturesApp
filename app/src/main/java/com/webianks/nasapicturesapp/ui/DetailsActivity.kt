@@ -2,9 +2,11 @@ package com.webianks.nasapicturesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.bumptech.glide.Glide
 import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityDetailsBinding
+import com.webianks.nasapicturesapp.ui.MainActivity.Companion.SINGLE_PICTURE
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -17,7 +19,7 @@ class DetailsActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        pictureData = intent.getSerializableExtra("picture") as NasaPicture?
+        pictureData = intent.getSerializableExtra(SINGLE_PICTURE) as NasaPicture?
         pictureData?.let {
             showPictureDetails(it)
         }
@@ -27,7 +29,13 @@ class DetailsActivity : AppCompatActivity() {
 
         binding.tvTitle.text = picture.title
         binding.tvDate.text = picture.date
-        binding.tvCopyright.text = "By - ${picture.copyright}"
+
+        picture.copyright?.let {
+            binding.tvCopyright.text = "By - $it"
+        } ?: kotlin.run {
+            binding.tvCopyright.visibility = View.GONE
+        }
+
         binding.tvDescription.text = picture.explanation
 
         Glide.with(this)
