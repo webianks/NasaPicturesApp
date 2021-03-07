@@ -1,5 +1,6 @@
 package com.webianks.nasapicturesapp.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProviders
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: PicturesListAdapter
 
-
     companion object {
         const val SINGLE_PICTURE = "picture"
         const val GRID_SPAN_COUNT = 2
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
@@ -63,11 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvPicturesList.layoutManager = GridLayoutManager(this, GRID_SPAN_COUNT)
         adapter = PicturesListAdapter(emptyList()) {
-            //val item = picturesList[it]
-            //Intent(this,DetailsActivity::class.java).run {
-            //putExtra(SINGLE_PICTURE,item)
-            //startActivity(this)
-            //}
+            val item = adapter.getItemAt(it)
+            item?.let {
+                Intent(this, DetailsActivity::class.java).run {
+                    putExtra(SINGLE_PICTURE, it)
+                    startActivity(this)
+                }
+            }
         }
         binding.rvPicturesList.adapter = adapter
     }

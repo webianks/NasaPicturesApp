@@ -24,9 +24,13 @@ class PicturesListAdapter(
 
     override fun getItemCount(): Int = list.size
 
-
     fun refreshList(nasaPicturesList: List<NasaPicture>) {
         list = nasaPicturesList
         notifyDataSetChanged()
     }
+
+    fun getItemAt(which: Int): NasaPicture? = if (which in list.indices) {
+        list[which]
+    } else null
+
 }
