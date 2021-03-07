@@ -27,6 +27,7 @@ class DetailsActivity : AppCompatActivity() {
 
         binding.tvTitle.text = picture.title
         binding.tvDate.text = picture.date
+        binding.tvCopyright.text = "By - ${picture.copyright}"
         binding.tvDescription.text = picture.explanation
 
         Glide.with(this)
