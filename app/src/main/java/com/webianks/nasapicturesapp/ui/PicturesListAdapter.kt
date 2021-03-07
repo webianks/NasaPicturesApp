@@ -7,7 +7,7 @@ import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ItemListPictureBinding
 
 class PicturesListAdapter(
-    private val list: List<NasaPicture>,
+    private var list: List<NasaPicture>,
     private val openDetailsClickLister: ((Int) -> Unit)? = null
 ) :
     RecyclerView.Adapter<PicturesListViewHolder>() {
@@ -23,4 +23,10 @@ class PicturesListAdapter(
     }
 
     override fun getItemCount(): Int = list.size
+
+
+    fun refreshList(nasaPicturesList: List<NasaPicture>) {
+        list = nasaPicturesList
+        notifyDataSetChanged()
+    }
 }
