@@ -2,7 +2,6 @@ package com.webianks.nasapicturesapp.utils
 
 import android.app.Application
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.webianks.nasapicturesapp.data.NasaPicture
 import java.io.IOException
 import java.io.InputStream

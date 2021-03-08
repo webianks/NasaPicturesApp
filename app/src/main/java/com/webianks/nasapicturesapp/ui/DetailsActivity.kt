@@ -2,6 +2,7 @@ package com.webianks.nasapicturesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import com.bumptech.glide.Glide
 import com.webianks.nasapicturesapp.data.NasaPicture
@@ -36,7 +37,7 @@ class DetailsActivity : AppCompatActivity() {
             binding.tvCopyright.visibility = View.GONE
         }
 
-        binding.tvDescription.text = picture.explanation
+        binding.tvDescription.text = Html.fromHtml(picture.explanation)
 
         Glide.with(this)
             .load(picture.hdUrl)

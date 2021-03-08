@@ -13,12 +13,6 @@
         <item name="fontFamily">@font/play_bold</item>
     </style>
 
-    <style name="Theme.NasaPicturesApp.Details" parent="Theme.NasaPicturesApp">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
-
-
     <style name="Theme.NasaPicturesApp.Detailed" parent="Theme.NasaPicturesApp">
         <item name="fontFamily">@font/noto_sans_regular</item>
     </style>

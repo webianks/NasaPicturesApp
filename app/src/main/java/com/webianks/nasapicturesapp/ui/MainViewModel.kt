@@ -4,11 +4,8 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.webianks.nasapicturesapp.utils.Success
-import com.webianks.nasapicturesapp.utils.UiState
-import com.webianks.nasapicturesapp.utils.getAssetJsonData
-import com.webianks.nasapicturesapp.utils.toNasaPicturesList
-
+import com.webianks.nasapicturesapp.utils.*
+import kotlin.collections.ArrayList
 
 class MainViewModel(private val application: Application, private val gson: Gson) : ViewModel() {
 
@@ -17,8 +14,10 @@ class MainViewModel(private val application: Application, private val gson: Gson
     fun getPicturesList(){
         val jsonArray = application.getAssetJsonData("data.json")
         val list = jsonArray?.toNasaPicturesList(gson)
-        list?.let {
-            picturesListState.postValue(Success(it))
+        list?.let { it ->
+            val arrayList =  ArrayList(it)
+            arrayList.sortByDescending{ picture -> picture.date}
+            picturesListState.postValue(Success(arrayList))
         }
     }
 
