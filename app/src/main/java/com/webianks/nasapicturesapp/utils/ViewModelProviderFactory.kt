@@ -2,7 +2,6 @@ package com.webianks.nasapicturesapp.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.webianks.nasapicturesapp.ui.MainViewModel
 import kotlin.reflect.KClass
 
 /**

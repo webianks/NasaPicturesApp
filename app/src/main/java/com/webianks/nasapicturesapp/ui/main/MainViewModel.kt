@@ -1,4 +1,4 @@
-package com.webianks.nasapicturesapp.ui
+package com.webianks.nasapicturesapp.ui.main
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.webianks.nasapicturesapp.ui
+package com.webianks.nasapicturesapp.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,8 @@ import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityMainBinding
 import com.webianks.nasapicturesapp.di.component.DaggerActivityComponent
 import com.webianks.nasapicturesapp.di.module.ActivityModule
+import com.webianks.nasapicturesapp.ui.PicturesListAdapter
+import com.webianks.nasapicturesapp.ui.details.DetailsActivity
 import com.webianks.nasapicturesapp.utils.EqualSpacingItemDecoration
 import com.webianks.nasapicturesapp.utils.Error
 import com.webianks.nasapicturesapp.utils.Loading

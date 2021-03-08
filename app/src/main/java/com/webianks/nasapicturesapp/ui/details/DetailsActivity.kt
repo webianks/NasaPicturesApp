@@ -1,6 +1,7 @@
-package com.webianks.nasapicturesapp.ui
+package com.webianks.nasapicturesapp.ui.details
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -9,12 +10,11 @@ import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityDetailsBinding
 import com.webianks.nasapicturesapp.di.component.DaggerActivityComponent
 import com.webianks.nasapicturesapp.di.module.ActivityModule
-import com.webianks.nasapicturesapp.ui.MainActivity.Companion.CLICKED_POSITION
-import com.webianks.nasapicturesapp.ui.details.DetailsFragment
-import com.webianks.nasapicturesapp.ui.details.DetailsViewModel
+import com.webianks.nasapicturesapp.ui.main.MainActivity.Companion.CLICKED_POSITION
 import com.webianks.nasapicturesapp.utils.Error
 import com.webianks.nasapicturesapp.utils.Loading
 import com.webianks.nasapicturesapp.utils.Success
+import com.webianks.nasapicturesapp.utils.ZoomOutPageTransformer
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -29,15 +29,21 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getDependencies()
-
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
+        setupViews()
         clickedPosition = intent.getIntExtra(CLICKED_POSITION, 0)
         setupObservers()
 
         viewModel.getPicturesList()
+    }
+
+    private fun setupViews() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ""
     }
 
     private fun setupObservers() {
@@ -58,15 +64,17 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun setupSliderAdapter(picturesList: List<NasaPicture>) {
         val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager, picturesList)
+        binding.pager.setPageTransformer(true, ZoomOutPageTransformer())
         binding.pager.adapter = pagerAdapter
         binding.pager.currentItem = clickedPosition
     }
 
-   /* override fun onBackPressed() {
-        if (binding.pager.currentItem == 0)
-            super.onBackPressed()
-        else
-            binding.pager.currentItem = binding.pager.currentItem - 1
+    /*
+     override fun onBackPressed() {
+          if (binding.pager.currentItem == 0)
+               super.onBackPressed()
+           else
+               binding.pager.currentItem = binding.pager.currentItem - 1
     }*/
 
     private fun getDependencies() {
@@ -75,6 +83,13 @@ class DetailsActivity : AppCompatActivity() {
             .activityModule(ActivityModule(this))
             .build()
             .inject(this)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home)
+            onBackPressed()
+        return super.onOptionsItemSelected(item)
     }
 
     private inner class ScreenSlidePagerAdapter(

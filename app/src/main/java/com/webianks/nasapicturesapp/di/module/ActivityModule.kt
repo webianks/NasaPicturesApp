@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
-import com.webianks.nasapicturesapp.ui.MainActivity.Companion.GRID_SPAN_COUNT
-import com.webianks.nasapicturesapp.ui.MainViewModel
+import com.webianks.nasapicturesapp.ui.main.MainActivity.Companion.GRID_SPAN_COUNT
+import com.webianks.nasapicturesapp.ui.main.MainViewModel
 import com.webianks.nasapicturesapp.ui.PicturesListAdapter
 import com.webianks.nasapicturesapp.ui.details.DetailsViewModel
 import com.webianks.nasapicturesapp.utils.ViewModelProviderFactory
