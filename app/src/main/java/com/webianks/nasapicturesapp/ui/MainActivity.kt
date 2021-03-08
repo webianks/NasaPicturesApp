@@ -26,10 +26,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: PicturesListAdapter
 
     @Inject
-    lateinit var glm : GridLayoutManager
+    lateinit var glm: GridLayoutManager
 
     companion object {
         const val SINGLE_PICTURE = "picture"
+        const val CLICKED_POSITION = "clicked_position"
         const val GRID_SPAN_COUNT = 2
     }
 
@@ -68,14 +69,15 @@ class MainActivity : AppCompatActivity() {
     private fun setupPicturesList() {
 
         binding.rvPicturesList.layoutManager = glm
-        binding.rvPicturesList.addItemDecoration(EqualSpacingItemDecoration(resources.getDimension(R.dimen.default_margin_grid).toInt()))
+        binding.rvPicturesList.addItemDecoration(
+            EqualSpacingItemDecoration(
+                resources.getDimension(R.dimen.default_margin_grid).toInt()
+            )
+        )
         adapter.openDetailsClickLister = {
-            val item = adapter.getItemAt(it)
-            item?.let {
-                Intent(this, DetailsActivity::class.java).run {
-                    putExtra(SINGLE_PICTURE, it)
-                    startActivity(this)
-                }
+            Intent(this, DetailsActivity::class.java).run {
+                putExtra(CLICKED_POSITION, it)
+                startActivity(this)
             }
         }
         binding.rvPicturesList.adapter = adapter

@@ -28,8 +28,4 @@ class PicturesListAdapter(private var list: List<NasaPicture>) :
         notifyDataSetChanged()
     }
 
-    fun getItemAt(which: Int): NasaPicture? = if (which in list.indices) {
-        list[which]
-    } else null
-
 }

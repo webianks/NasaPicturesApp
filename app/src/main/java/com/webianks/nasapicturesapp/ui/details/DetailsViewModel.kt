@@ -1,4 +1,4 @@
-package com.webianks.nasapicturesapp.ui
+package com.webianks.nasapicturesapp.ui.details
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import com.google.gson.Gson
 import com.webianks.nasapicturesapp.utils.*
 import kotlin.collections.ArrayList
 
-class MainViewModel(private val application: Application, private val gson: Gson) : ViewModel() {
+class DetailsViewModel(private val application: Application, private val gson: Gson) : ViewModel() {
 
     val picturesListState = MutableLiveData<UiState>()
 

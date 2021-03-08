@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import com.webianks.nasapicturesapp.ui.MainActivity.Companion.GRID_SPAN_COUNT
 import com.webianks.nasapicturesapp.ui.MainViewModel
 import com.webianks.nasapicturesapp.ui.PicturesListAdapter
+import com.webianks.nasapicturesapp.ui.details.DetailsViewModel
 import com.webianks.nasapicturesapp.utils.ViewModelProviderFactory
 import dagger.Module
 import dagger.Provides
@@ -35,4 +36,13 @@ class ActivityModule(private val activity: AppCompatActivity) {
         activity, ViewModelProviderFactory(MainViewModel::class) {
             MainViewModel(application, gson)
         }).get(MainViewModel::class.java)
+
+    @Provides
+    fun provideDetailsViewModel(
+        application: Application,
+        gson: Gson
+    ): DetailsViewModel = ViewModelProviders.of(
+        activity, ViewModelProviderFactory(DetailsViewModel::class) {
+            DetailsViewModel(application, gson)
+        }).get(DetailsViewModel::class.java)
 }
