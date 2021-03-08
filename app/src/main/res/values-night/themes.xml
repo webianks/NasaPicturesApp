@@ -11,8 +11,9 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="fontFamily">@font/noto_sans_regular</item>
-
+        <item name="fontFamily">@font/play_bold</item>
     </style>
+
+
 
 </resources>

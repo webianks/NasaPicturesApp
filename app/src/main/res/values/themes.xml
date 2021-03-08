@@ -1,8 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.NasaPicturesApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item
-            name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
 
@@ -11,12 +10,17 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <item name="fontFamily">@font/noto_sans_regular</item>
+        <item name="fontFamily">@font/play_bold</item>
     </style>
 
     <style name="Theme.NasaPicturesApp.Details" parent="Theme.NasaPicturesApp">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+
+    <style name="Theme.NasaPicturesApp.Detailed" parent="Theme.NasaPicturesApp">
+        <item name="fontFamily">@font/noto_sans_regular</item>
     </style>
 
 </resources>

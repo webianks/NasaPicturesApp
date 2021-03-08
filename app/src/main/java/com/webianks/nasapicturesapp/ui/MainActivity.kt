@@ -3,17 +3,16 @@ package com.webianks.nasapicturesapp.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.gson.Gson
+import com.webianks.nasapicturesapp.R
 import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityMainBinding
 import com.webianks.nasapicturesapp.di.component.DaggerActivityComponent
 import com.webianks.nasapicturesapp.di.module.ActivityModule
+import com.webianks.nasapicturesapp.utils.EqualSpacingItemDecoration
 import com.webianks.nasapicturesapp.utils.Error
 import com.webianks.nasapicturesapp.utils.Loading
 import com.webianks.nasapicturesapp.utils.Success
-import com.webianks.nasapicturesapp.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -64,12 +63,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
     private fun setupPicturesList() {
 
         binding.rvPicturesList.layoutManager = glm
+        binding.rvPicturesList.addItemDecoration(EqualSpacingItemDecoration(resources.getDimension(R.dimen.default_margin_grid).toInt()))
         adapter.openDetailsClickLister = {
             val item = adapter.getItemAt(it)
             item?.let {
