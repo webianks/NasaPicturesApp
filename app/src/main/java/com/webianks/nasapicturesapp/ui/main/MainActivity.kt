@@ -19,7 +19,8 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    @Inject
+    lateinit var binding: ActivityMainBinding
 
     @Inject
     lateinit var viewModel: MainViewModel
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         getDependencies()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
         setContentView(view)

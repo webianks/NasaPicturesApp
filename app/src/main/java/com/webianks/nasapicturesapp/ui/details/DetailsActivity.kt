@@ -21,7 +21,9 @@ import kotlin.properties.Delegates
 class DetailsActivity : AppCompatActivity() {
 
     private var clickedPosition by Delegates.notNull<Int>()
-    private lateinit var binding: ActivityDetailsBinding
+
+    @Inject
+    lateinit var binding: ActivityDetailsBinding
 
     @Inject
     lateinit var viewModel: DetailsViewModel
@@ -29,7 +31,7 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getDependencies()
-        binding = ActivityDetailsBinding.inflate(layoutInflater)
+
         val view = binding.root
         setContentView(view)
 

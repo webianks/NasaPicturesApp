@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
+import com.webianks.nasapicturesapp.databinding.ActivityDetailsBinding
+import com.webianks.nasapicturesapp.databinding.ActivityMainBinding
 import com.webianks.nasapicturesapp.ui.main.MainActivity.Companion.GRID_SPAN_COUNT
 import com.webianks.nasapicturesapp.ui.main.MainViewModel
 import com.webianks.nasapicturesapp.ui.PicturesListAdapter
@@ -27,6 +29,13 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideRecyclerViewAdapter() = PicturesListAdapter(emptyList())
+
+
+    @Provides
+    fun provideDetailActivityBinding() = ActivityDetailsBinding.inflate(activity.layoutInflater)
+
+    @Provides
+    fun provideMainActivityBinding() = ActivityMainBinding.inflate(activity.layoutInflater)
 
     @Provides
     fun provideMainViewModel(
