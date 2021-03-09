@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
+import com.webianks.nasapicturesapp.data.PictureRepository
 import com.webianks.nasapicturesapp.databinding.ActivityDetailsBinding
 import com.webianks.nasapicturesapp.databinding.ActivityMainBinding
 import com.webianks.nasapicturesapp.ui.main.MainActivity.Companion.GRID_SPAN_COUNT
@@ -43,7 +44,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
         gson: Gson
     ): MainViewModel = ViewModelProviders.of(
         activity, ViewModelProviderFactory(MainViewModel::class) {
-            MainViewModel(application, gson)
+            MainViewModel(PictureRepository(application, gson))
         }).get(MainViewModel::class.java)
 
     @Provides
@@ -52,6 +53,6 @@ class ActivityModule(private val activity: AppCompatActivity) {
         gson: Gson
     ): DetailsViewModel = ViewModelProviders.of(
         activity, ViewModelProviderFactory(DetailsViewModel::class) {
-            DetailsViewModel(application, gson)
+            DetailsViewModel(PictureRepository(application, gson))
         }).get(DetailsViewModel::class.java)
 }

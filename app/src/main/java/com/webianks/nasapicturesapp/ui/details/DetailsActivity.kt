@@ -71,14 +71,6 @@ class DetailsActivity : AppCompatActivity() {
         binding.pager.currentItem = clickedPosition
     }
 
-    /*
-     override fun onBackPressed() {
-          if (binding.pager.currentItem == 0)
-               super.onBackPressed()
-           else
-               binding.pager.currentItem = binding.pager.currentItem - 1
-    }*/
-
     private fun getDependencies() {
         DaggerActivityComponent
             .builder()

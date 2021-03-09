@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Nasa Pictures</string>
+    <string name="default_error_msg">Something went wrong</string>
 </resources>
