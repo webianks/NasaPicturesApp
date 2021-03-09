@@ -17,8 +17,7 @@ import com.webianks.nasapicturesapp.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
 
-    private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentDetailsBinding? = null
 
     companion object {
         fun newInstance(nasaPicture: NasaPicture): DetailsFragment {
@@ -34,9 +33,9 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        return binding.root
+    ): View? {
+        binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,23 +49,23 @@ class DetailsFragment : Fragment() {
 
     private fun showPictureDetails(picture: NasaPicture) {
 
-        binding.tvTitle.text = picture.title
-        binding.tvDate.text = picture.date
+        binding?.tvTitle?.text = picture.title
+        binding?.tvDate?.text = picture.date
 
         picture.copyright?.let {
-            binding.tvCopyright.text = "By - $it"
+            binding?.tvCopyright?.text = "By - $it"
         } ?: kotlin.run {
-            binding.tvCopyright.visibility = View.GONE
+            binding?.tvCopyright?.visibility = View.GONE
         }
 
-        binding.tvDescription.text = Html.fromHtml(picture.explanation)
+        binding?.tvDescription?.text = Html.fromHtml(picture.explanation)
 
         Glide.with(this)
             .asBitmap()
             .load(picture.hdUrl)
             .into(object : SimpleTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    binding.ivPicture.setImageBitmap(resource)
+                    binding?.ivPicture?.setImageBitmap(resource)
                     setColors(resource)
                 }
             })
@@ -76,16 +75,19 @@ class DetailsFragment : Fragment() {
         val builder = Palette.Builder(bitmap)
         builder.generate { palette: Palette? ->
             val vibrantSwatch = palette?.vibrantSwatch
-            vibrantSwatch?.titleTextColor?.let { binding.tvTitle.setTextColor(it) }
-            vibrantSwatch?.bodyTextColor?.let { binding.tvDate.setTextColor(it) }
-            vibrantSwatch?.titleTextColor?.let { binding.tvCopyright.setTextColor(it) }
-            vibrantSwatch?.bodyTextColor?.let { binding.tvDescription.setTextColor(it) }
-            vibrantSwatch?.rgb?.let { binding.root.setBackgroundColor(it) }
+            binding?.let {
+                binding ->
+                vibrantSwatch?.titleTextColor?.let { binding.tvTitle.setTextColor(it) }
+                vibrantSwatch?.bodyTextColor?.let { binding.tvDate.setTextColor(it) }
+                vibrantSwatch?.titleTextColor?.let { binding.tvCopyright.setTextColor(it) }
+                vibrantSwatch?.bodyTextColor?.let { binding.tvDescription.setTextColor(it) }
+                vibrantSwatch?.rgb?.let { binding.root.setBackgroundColor(it) }
+            }
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 }
