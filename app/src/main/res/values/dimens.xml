@@ -4,6 +4,13 @@
     <dimen name="default_padding_double">32dp</dimen>
     <dimen name="default_padding_half">8dp</dimen>
     <dimen name="default_margin_grid">12dp</dimen>
-    <dimen name="radius_picture_card">8dp</dimen>
     <dimen name="default_gird_picture_height">150dp</dimen>
+    <dimen name="default_margin_fourth">4dp</dimen>
+
+    <dimen name="radius_picture_card">8dp</dimen>
+
+    <dimen name="size_app_title_text">21sp</dimen>
+    <dimen name="size_detail_title_text">35sp</dimen>
+    <dimen name="size_subtitle_text">14sp</dimen>
+    <dimen name="size_title_text">17sp</dimen>
 </resources>
