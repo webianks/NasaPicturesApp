@@ -6,6 +6,7 @@ import com.webianks.nasapicturesapp.R
 import com.webianks.nasapicturesapp.data.PictureRepository
 import com.webianks.nasapicturesapp.utils.*
 
+@OpenForTesting
 class MainViewModel(private val pictureRepository: PictureRepository) : ViewModel() {
 
     val picturesListState = MutableLiveData<UiState>()

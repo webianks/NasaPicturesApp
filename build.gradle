@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -23,4 +23,16 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    // Dagger
+    dagger_version = '2.33'
+    // Tests
+    junit_version = '4.13.2'
+    mockito_version = '2.25.0'
+    core_testing_version = '2.1.0'
+    test_runner_version = '1.1.1'
+    test_ext_runner_version = '1.1.0'
+    hamcrest_version = '2.1'
 }
