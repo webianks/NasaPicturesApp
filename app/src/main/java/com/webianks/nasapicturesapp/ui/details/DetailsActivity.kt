@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityDetailsBinding
 import com.webianks.nasapicturesapp.di.component.DaggerActivityComponent
@@ -34,10 +35,10 @@ class DetailsActivity : AppCompatActivity() {
 
         val view = binding.root
         setContentView(view)
-
         setupViews()
-        clickedPosition = intent.getIntExtra(CLICKED_POSITION, 0)
         setupObservers()
+
+        clickedPosition = intent.getIntExtra(CLICKED_POSITION, 0)
 
         viewModel.getPicturesList()
     }
@@ -52,6 +53,7 @@ class DetailsActivity : AppCompatActivity() {
         viewModel.picturesListState.observe(this) {
             when (it) {
                 is Error -> {
+                    showMessage(it.resId)
                 }
                 Loading -> {
                 }
@@ -84,6 +86,10 @@ class DetailsActivity : AppCompatActivity() {
         if (item.itemId == android.R.id.home)
             onBackPressed()
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showMessage(resId: Int) {
+        Snackbar.make(binding.pager, resId, Snackbar.LENGTH_SHORT).show()
     }
 
     private inner class ScreenSlidePagerAdapter(

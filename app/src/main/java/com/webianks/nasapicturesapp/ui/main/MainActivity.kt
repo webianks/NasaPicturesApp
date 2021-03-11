@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.webianks.nasapicturesapp.R
 import com.webianks.nasapicturesapp.data.NasaPicture
 import com.webianks.nasapicturesapp.databinding.ActivityMainBinding
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.picturesListState.observe(this) {
             when (it) {
                 is Error -> {
+                    showMessage(it.resId)
                 }
                 Loading -> {
                 }
@@ -66,6 +68,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showMessage(resId: Int) {
+        Snackbar.make(binding.rvPicturesList,resId,Snackbar.LENGTH_SHORT).show()
     }
 
     private fun setupPicturesList() {

@@ -75,15 +75,21 @@ class DetailsFragment : Fragment() {
         val builder = Palette.Builder(bitmap)
         builder.generate { palette: Palette? ->
             val vibrantSwatch = palette?.vibrantSwatch
-            binding?.let {
-                binding ->
-                vibrantSwatch?.titleTextColor?.let { binding.tvTitle.setTextColor(it) }
-                vibrantSwatch?.bodyTextColor?.let { binding.tvDate.setTextColor(it) }
-                vibrantSwatch?.titleTextColor?.let { binding.tvCopyright.setTextColor(it) }
-                vibrantSwatch?.bodyTextColor?.let { binding.tvDescription.setTextColor(it) }
-                vibrantSwatch?.rgb?.let { binding.root.setBackgroundColor(it) }
+            vibrantSwatch?.let {
+                binding?.let {
+                        binding ->
+                    setSwatchColors(binding,it)
+                }
             }
         }
+    }
+
+    private fun setSwatchColors(binding: FragmentDetailsBinding, vibrantSwatch: Palette.Swatch) {
+        vibrantSwatch.titleTextColor.let { binding.tvTitle.setTextColor(it) }
+        vibrantSwatch.bodyTextColor.let { binding.tvDate.setTextColor(it) }
+        vibrantSwatch.titleTextColor.let { binding.tvCopyright.setTextColor(it) }
+        vibrantSwatch.bodyTextColor.let { binding.tvDescription.setTextColor(it) }
+        vibrantSwatch.rgb.let { binding.root.setBackgroundColor(it) }
     }
 
     override fun onDestroyView() {
