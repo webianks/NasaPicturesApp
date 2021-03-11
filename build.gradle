@@ -29,6 +29,7 @@ ext {
     // Dagger
     dagger_version = '2.33'
     // Tests
+    espresso_version = '3.1.0'
     junit_version = '4.13.2'
     mockito_version = '2.25.0'
     core_testing_version = '2.1.0'

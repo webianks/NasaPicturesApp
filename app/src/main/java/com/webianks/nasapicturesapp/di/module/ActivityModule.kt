@@ -39,20 +39,25 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun provideMainActivityBinding() = ActivityMainBinding.inflate(activity.layoutInflater)
 
     @Provides
+    fun getFileName() = "data.json"
+
+    @Provides
     fun provideMainViewModel(
         application: Application,
-        gson: Gson
+        gson: Gson,
+        fileName: String
     ): MainViewModel = ViewModelProviders.of(
         activity, ViewModelProviderFactory(MainViewModel::class) {
-            MainViewModel(PictureRepository(application, gson))
+            MainViewModel(PictureRepository(application, gson,fileName))
         }).get(MainViewModel::class.java)
 
     @Provides
     fun provideDetailsViewModel(
         application: Application,
-        gson: Gson
+        gson: Gson,
+        fileName: String
     ): DetailsViewModel = ViewModelProviders.of(
         activity, ViewModelProviderFactory(DetailsViewModel::class) {
-            DetailsViewModel(PictureRepository(application, gson))
+            DetailsViewModel(PictureRepository(application, gson,fileName))
         }).get(DetailsViewModel::class.java)
 }

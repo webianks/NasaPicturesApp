@@ -8,7 +8,7 @@ import com.webianks.nasapicturesapp.utils.toNasaPicturesList
 import java.lang.Exception
 
 @OpenForTesting
-class PictureRepository(private val application: Application, private val gson: Gson) {
+class PictureRepository(private val application: Application, private val gson: Gson, private val fileName: String) {
 
     /**
      * Mimicking network response here with success and error callback
@@ -17,7 +17,7 @@ class PictureRepository(private val application: Application, private val gson: 
         success: ((List<NasaPicture>) -> Unit)? = null,
         error: ((Exception) -> Unit)? = null
     ) {
-        val jsonArray = application.getAssetJsonData("data.json")
+        val jsonArray = application.getAssetJsonData(fileName)
         val list = jsonArray?.toNasaPicturesList(gson)
         list?.let { it ->
             val arrayList = ArrayList(it)
